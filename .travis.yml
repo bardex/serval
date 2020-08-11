@@ -16,6 +16,7 @@ install:
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
 
+
 before_deploy:
   - mkdir -p build/{386,amd64}
   - GOOS=linux GOARCH=386 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER} -X main.commit=${TRAVIS_COMMIT}" -o build/386/${MYAPP}-386 *.go
