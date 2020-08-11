@@ -27,8 +27,9 @@ deploy:
   provider: releases
   api_key: ${GH_TOKEN}
   file:
-    - build/386/${MYAPP}-386
-    - build/amd64/${MYAPP}-amd64
+    - build/${MYAPP}-amd64-linux
+    - build/${MYAPP}-amd64-win.exe
+    - build/${MYAPP}-amd64-macos
   skip_cleanup: true
   on:
     tags: true
