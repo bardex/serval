@@ -7,7 +7,6 @@ env:
   global:
     - MYAPP=serval
     - MYEMAIL=sumin.200ok@gmail.com
-    - secure: "oiGI2wsXNxgM/aplW4Qa4aBc0j6xFnZmvJgeTIhOnc5oO2ldLQvZZn5vpBNPjChqD14OR4gLbZqoEJ303kDPTv93tw5yo6nFaS/b1692NW62mEYvj8fVSy1WXxVgt5rGb5Jgzn3meqvMFKJx10uxIH8ijIiSf4QdAfay571OahHiyyDsQJZdx73F0hZFSjx1RXEPN7yMv6Ad92bg2XoJhKQS4nxDF8yKbT8wl+5Khs8TOEn56TxKDwOhaOCt+xqaBYseQE/V25lqq6slpWwDkr+2657lYScbVMcR77QPu8fUGkSa6ZsOFr40fEWbP0R0wer0DyWi4NZyMMOJiEvsa2o6+v12MaSfCxySpQE6tCloiRdZbO5ggQyDby1ZG1aRW+BiY5Td563VqarnlGasmJDxr9+qjblmHMEHuUaTryAxn6z/1l8aDMGpeY6PVSdRdpiFniR0ftPB2h0u8RKZl7bfzGpVE30F6DXjzTNO0LcUQa3+4V6Mjb90ikBbCurVO0nkHeOFzhdGCEnnpsm0nBBvgbj1bK9nj9QMi69SwX3ddFfLvibWjubfqmBF/J2Dewov6eW3SIqrXSrIgYhf3aqCAYPkd/7SrGkgFnkd6SZXcpvV9sh2HMGXUbmRByK0n98d/U7AvbDWfMYk2dpO9K6kae8AnQr09KckxlrCnCA="
 
 before_install:
   - sudo apt-get -qq update
@@ -24,6 +23,8 @@ before_deploy:
 
 deploy:
   provider: releases
+  api_key:
+      secure: "oiGI2wsXNxgM/aplW4Qa4aBc0j6xFnZmvJgeTIhOnc5oO2ldLQvZZn5vpBNPjChqD14OR4gLbZqoEJ303kDPTv93tw5yo6nFaS/b1692NW62mEYvj8fVSy1WXxVgt5rGb5Jgzn3meqvMFKJx10uxIH8ijIiSf4QdAfay571OahHiyyDsQJZdx73F0hZFSjx1RXEPN7yMv6Ad92bg2XoJhKQS4nxDF8yKbT8wl+5Khs8TOEn56TxKDwOhaOCt+xqaBYseQE/V25lqq6slpWwDkr+2657lYScbVMcR77QPu8fUGkSa6ZsOFr40fEWbP0R0wer0DyWi4NZyMMOJiEvsa2o6+v12MaSfCxySpQE6tCloiRdZbO5ggQyDby1ZG1aRW+BiY5Td563VqarnlGasmJDxr9+qjblmHMEHuUaTryAxn6z/1l8aDMGpeY6PVSdRdpiFniR0ftPB2h0u8RKZl7bfzGpVE30F6DXjzTNO0LcUQa3+4V6Mjb90ikBbCurVO0nkHeOFzhdGCEnnpsm0nBBvgbj1bK9nj9QMi69SwX3ddFfLvibWjubfqmBF/J2Dewov6eW3SIqrXSrIgYhf3aqCAYPkd/7SrGkgFnkd6SZXcpvV9sh2HMGXUbmRByK0n98d/U7AvbDWfMYk2dpO9K6kae8AnQr09KckxlrCnCA="
   file:
     - build/386/${MYAPP}-386
     - build/amd64/${MYAPP}-amd64
