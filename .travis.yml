@@ -15,12 +15,6 @@ install:
   - go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
-  - go get -u github.com/gobuffalo/packr/v2/packr2
-  - ls -l
-  - packr2 clean -v
-  - packr2 -v
-  - ls -l
-  - go build -v
 
 before_deploy:
   - mkdir -p build/
