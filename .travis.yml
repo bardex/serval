@@ -17,16 +17,19 @@ install:
   - go build -o test_build
   - ls -l
   - go test -v ./...
+  - go get -u github.com/gobuffalo/packr/v2/packr2
 
 before_deploy:
   - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
 
 deploy:
   provider: releases
   api_key: ${GH_TOKEN}
   file:
     - build/${MYAPP}_${TRAVIS_TAG}_amd64_linux
+    - build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe
   skip_cleanup: true
   on:
     tags: true
