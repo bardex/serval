@@ -15,14 +15,14 @@ install:
   - go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
-  - go get -u github.com/gobuffalo/packr/v2/packr2
+  - go get -v ./...
   - packr2
 
 before_deploy:
   - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER} -X main.commit=${TRAVIS_COMMIT}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
-  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER} -X main.commit=${TRAVIS_COMMIT}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
-  - GOOS=darwin GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER} -X main.commit=${TRAVIS_COMMIT}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_macos *.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
+  - GOOS=darwin GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_macos *.go
 
 deploy:
   provider: releases
