@@ -16,10 +16,13 @@ install:
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
   - go get -u github.com/gobuffalo/packr/v2/packr2
+  - ls -l
+  - packr2 -v
+  - ls -l
 
 before_deploy:
   - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 packr2 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
 
 deploy:
   provider: releases
