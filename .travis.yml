@@ -15,7 +15,8 @@ install:
   - go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
-  - go get -v ./...
+  - go get -u github.com/gobuffalo/packr/v2/packr2
+  - GO111MODULE=on go mod download
   - packr2
 
 before_deploy:
