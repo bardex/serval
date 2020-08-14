@@ -7,18 +7,19 @@ env:
   global:
     - MYAPP=serval
     - MYEMAIL=sumin.200ok@gmail.com
+    - GO111MODULE=on
 
 before_install:
   - sudo apt-get -qq update
 
 install:
-  - go get -u github.com/bardex/$MYAPP
+  - GO111MODULE=on go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
-  - go build -o test_build
   - go get -u github.com/gobuffalo/packr/v2/packr2
   - packr2 clean
   - packr2
   - ls -l
+  - go build -o test_build
   - go test -v ./...
 
 before_deploy:
