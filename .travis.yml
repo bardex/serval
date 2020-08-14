@@ -15,7 +15,7 @@ install:
   - go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
-
+  - packr2
 
 before_deploy:
   - mkdir -p build/
