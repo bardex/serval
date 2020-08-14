@@ -3,6 +3,9 @@ language: go
 go:
   - 1.13.x
 
+git:
+  depth: 3
+
 env:
   global:
     - MYAPP=serval
@@ -15,8 +18,6 @@ before_install:
 install:
   - pwd
   - ls -l
-  - GO111MODULE=on go get -u github.com/bardex/$MYAPP
-  - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go get -u github.com/gobuffalo/packr/v2/packr2
   - packr2 clean
   - packr2
