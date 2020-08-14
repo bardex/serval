@@ -7,26 +7,33 @@ import (
 	"html/template"
 )
 
-var router *gin.Engine
+type Server struct {
+	router *gin.Engine
+}
 
-func Start() {
-	//gin.SetMode(gin.ReleaseMode)
-	router = gin.Default()
+func (s *Server) Start() {
+	s.router.Run()
+}
 
-	tplBox := packr.New("templates", "assets/templates")
+func (s *Server) Create(releaseMode string) {
+	gin.SetMode(releaseMode)
+	s.router = gin.Default()
+	s.loadTemplates()
+	initRoutes(s.router)
+}
 
-	tpl := template.New("")
-
-	tplBox.Walk(func(path string, f packd.File) error {
-		tmpl := tpl.New(f.Name())
-		data, _ := tplBox.FindString(f.Name())
-		tmpl.Parse(data)
-
-		return nil
-	})
-
-	router.SetHTMLTemplate(tpl)
-
-	initRoutes()
-	router.Run()
+func (s *Server) loadTemplates() {
+	if gin.IsDebugging() {
+		s.router.LoadHTMLGlob("web/assets/templates/*")
+	} else {
+		tplBox := packr.New("templates", "assets/templates")
+		tpl := template.New("")
+		tplBox.Walk(func(path string, f packd.File) error {
+			tmpl := tpl.New(f.Name())
+			data, _ := tplBox.FindString(f.Name())
+			tmpl.Parse(data)
+			return nil
+		})
+		s.router.SetHTMLTemplate(tpl)
+	}
 }

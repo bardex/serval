@@ -1,8 +1,11 @@
 package web
 
-import "serval/web/actions"
+import (
+	"github.com/gin-gonic/gin"
+	"serval/web/actions"
+)
 
-func initRoutes() {
+func initRoutes(router *gin.Engine) {
 	router.GET("/", actions.Home)
 
 	// static files
