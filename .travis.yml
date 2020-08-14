@@ -20,6 +20,7 @@ install:
   - packr2 clean -v
   - packr2 -v
   - ls -l
+  - go build -v
 
 before_deploy:
   - mkdir -p build/
