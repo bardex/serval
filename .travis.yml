@@ -21,19 +21,17 @@ install:
   - go get -u github.com/gobuffalo/packr/v2/packr2
   - packr2 clean
   - packr2
-  - go test -v ./...
 
 before_deploy:
-  - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
-  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o ${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.ReleaseMode=release -X main.Version=${TRAVIS_TAG} -X main.Build=${TRAVIS_BUILD_NUMBER}" -o ${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
 
 deploy:
   provider: releases
   api_key: ${GH_TOKEN}
   file:
-    - build/${MYAPP}_${TRAVIS_TAG}_amd64_linux
-    - build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe
+    - ${MYAPP}_${TRAVIS_TAG}_amd64_linux
+    - ${MYAPP}_${TRAVIS_TAG}_amd64_win.exe
   skip_cleanup: true
   on:
     tags: true
