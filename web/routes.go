@@ -2,11 +2,10 @@ package web
 
 import (
 	"github.com/gin-gonic/gin"
-	"serval/web/actions"
 )
 
-func initRoutes(router *gin.Engine) {
-	router.GET("/", actions.Home)
+func initRoutes(s *Server, router *gin.Engine) {
+	router.GET("/", s.Home)
 
 	// static files
 	router.Static("/assets", "./web/assets/public")

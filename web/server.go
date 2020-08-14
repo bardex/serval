@@ -8,7 +8,8 @@ import (
 )
 
 type Server struct {
-	router *gin.Engine
+	router  *gin.Engine
+	Version string
 }
 
 func (s *Server) Start() {
@@ -19,7 +20,7 @@ func (s *Server) Create(releaseMode string) {
 	gin.SetMode(releaseMode)
 	s.router = gin.Default()
 	s.loadTemplates()
-	initRoutes(s.router)
+	initRoutes(s, s.router)
 }
 
 func (s *Server) loadTemplates() {
