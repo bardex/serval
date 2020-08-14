@@ -16,22 +16,16 @@ install:
   - cd $GOPATH/src/github.com/bardex/$MYAPP
   - go install
   - go get -u github.com/gobuffalo/packr/v2/packr2
-  - ls -l $GOPATH/bin
-  - $GOPATH/bin/packr2
 
 before_deploy:
   - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
-  - GOOS=windows GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe *.go
-  - GOOS=darwin GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_macos *.go
+  - GOOS=linux GOARCH=amd64 packr2 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
 
 deploy:
   provider: releases
   api_key: ${GH_TOKEN}
   file:
     - build/${MYAPP}_${TRAVIS_TAG}_amd64_linux
-    - build/${MYAPP}_${TRAVIS_TAG}_amd64_win.exe
-    - build/${MYAPP}_${TRAVIS_TAG}_amd64_macos
   skip_cleanup: true
   on:
     tags: true
