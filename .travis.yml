@@ -18,6 +18,8 @@ install:
   - ls -l
   - go test -v ./...
   - go get -u github.com/gobuffalo/packr/v2/packr2
+  - packr2 clean
+  - packr2
 
 before_deploy:
   - mkdir -p build/
