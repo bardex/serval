@@ -7,6 +7,7 @@ env:
   global:
     - MYAPP=serval
     - MYEMAIL=sumin.200ok@gmail.com
+    - GIN_MODE=release
 
 before_install:
   - sudo apt-get -qq update
@@ -14,11 +15,12 @@ before_install:
 install:
   - go get -u github.com/bardex/$MYAPP
   - cd $GOPATH/src/github.com/bardex/$MYAPP
-  - go install
+  - go build -o test_build
+  - ls -l
 
 before_deploy:
   - mkdir -p build/
-  - GOOS=linux GOARCH=amd64 go build --ldflags "-X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
+  - GOOS=linux GOARCH=amd64 go build --ldflags "-X ReleaseMode=release -X main.version=${TRAVIS_TAG} -X main.build=${TRAVIS_BUILD_NUMBER}" -o build/${MYAPP}_${TRAVIS_TAG}_amd64_linux *.go
 
 deploy:
   provider: releases
