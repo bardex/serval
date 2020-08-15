@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Serval</title>
+</head>
+
+<body>
+
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index: 3; width: 200px; display: none;" id="mySidebar"><br>
+    <div class="w3-container">
+        <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+            <i class="fa fa-remove"></i>
+        </a>
+        <img src="/assets/serval.png" style="width:45%;" class="w3-round"><br><br>
+        <h4><b>SERVAL</b><sup><small>{{ .version }}</small></sup></h4>
+    </div>
+    <div class="w3-bar-block">
+        <a href="/indexes" class="w3-bar-item w3-button w3-padding w3-text-teal">
+            <i class="fa fa-database fa-fw w3-margin-right"></i>ЛОГИ
+        </a>
+        <a href="/settings" class="w3-bar-item w3-button w3-padding w3-text-teal">
+            <i class="fa fa-cogs fa-fw w3-margin-right"></i>НАСТРОЙКИ
+        </a>
+        <a href="/help" class="w3-bar-item w3-button w3-padding w3-text-teal">
+            <i class="fa fa-life-ring fa-fw w3-margin-right"></i>ПОМОЩЬ
+        </a>
+    </div>
+</nav>
+
+
+</body>
+</html>

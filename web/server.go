@@ -25,9 +25,9 @@ func (s *Server) Create(releaseMode string) {
 
 func (s *Server) loadTemplates() {
 	if gin.IsDebugging() {
-		s.router.LoadHTMLGlob("web/assets/templates/*")
+		s.router.LoadHTMLGlob("web/templates/*")
 	} else {
-		tplBox := packr.New("templates", "assets/templates")
+		tplBox := packr.New("templates", "templates")
 		tpl := template.New("")
 		tplBox.Walk(func(path string, f packd.File) error {
 			tmpl := tpl.New(f.Name())

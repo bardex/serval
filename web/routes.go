@@ -2,12 +2,16 @@ package web
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/gobuffalo/packr/v2"
 )
 
 func initRoutes(s *Server, router *gin.Engine) {
 	router.GET("/", s.Home)
 
 	// static files
-	router.Static("/assets", "./web/assets/public")
-	router.StaticFile("/favicon.ico", "./web/assets/public/favicon.ico")
+	static := packr.New("static", "public")
+	router.StaticFS("/assets", static)
+	router.GET("/favicon.ico", func(c *gin.Context) {
+		c.FileFromFS("/favicon.ico", static)
+	})
 }
